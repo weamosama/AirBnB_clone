@@ -9,15 +9,16 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class for HBNB project"""
-    
     prompt = '(hbnb) '
-    
+
     def emptyline(self):
+
         """Called when an empty line is entered"""
         pass
-    
+
     def do_EOF(self, line):
         """Quit command interpreter"""
         return True
@@ -25,14 +26,21 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, line):
         """Quit command interpreter"""
         return True
-    
+
     def do_create(self, arg):
         """Create a new instance of BaseModel and save it to the JSON file"""
         if not arg:
             print("** class name missing **")
             return
         class_name = arg.split()[0]
-        if class_name not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        if class_name not in [
+                "BaseModel",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         new_instance = eval(f"{class_name}()")
@@ -40,12 +48,19 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation"""
         if not arg:
             print("** class name missing **")
             return
         args = arg.split()
-        if args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        if args[0] not in [
+                "BaseModel",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -63,7 +78,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = arg.split()
-        if args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        if args[0] not in [
+                "BaseModel",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -77,24 +99,41 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        """Prints all string representations of all instances or of the specified class"""
+        """Prints all string representations"""
         args = arg.split()
-        if args and args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        if args and args[0] not in [
+                "BaseModel",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if args:
-            instances = [str(value) for key, value in storage.all().items() if args[0] == key.split('.')[0]]
+            instances = [
+                    str(value) for key,
+                    value in storage.all().items()
+                    if args[0] == key.split('.')[0]]
         else:
             instances = [str(value) for value in storage.all().values()]
         print(instances)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute"""
+        """Updates an instance based on the class name"""
         if not arg:
             print("** class name missing **")
             return
         args = arg.split()
-        if args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        if args[0] not in [
+                "BaseModel",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -113,6 +152,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(storage.all()[key], args[2], eval(args[3]))
         storage.all()[key].save()
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
