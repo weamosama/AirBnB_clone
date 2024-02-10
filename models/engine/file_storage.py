@@ -8,8 +8,9 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage:
-    """Class to serialize and deserialize instances to a JSON file and vice versa"""
+    """Class to serialize and deserialize"""
     __file_path = "file.json"
     __objects = {}
 
@@ -37,8 +38,14 @@ class FileStorage:
                 obj_dict = json.load(file)
             for key, value in obj_dict.items():
                 class_name, obj_id = key.split('.')
-                class_dict = {"BaseModel": BaseModel, "State": State, "City": City,
-                              "Amenity": Amenity, "Place": Place, "Review": Review}
+                class_dict = {
+                        "BaseModel": BaseModel,
+                        "State": State,
+                        "City": City,
+                        "Amenity": Amenity,
+                        "Place": Place,
+                        "Review": Review
+                        }
                 obj = class_dict[class_name](**value)
                 FileStorage.__objects[key] = obj
         except FileNotFoundError:
