@@ -7,6 +7,7 @@ import unittest
 from models import storage
 from models.base_model import BaseModel
 
+
 class TestSaveReloadBaseModel(unittest.TestCase):
     """
     Test cases for BaseModel class with file storage
@@ -28,6 +29,7 @@ class TestSaveReloadBaseModel(unittest.TestCase):
         my_model.my_number = 89
         my_model.save()
         print(my_model)
+
 
 if __name__ == "__main__":
     unittest.main()

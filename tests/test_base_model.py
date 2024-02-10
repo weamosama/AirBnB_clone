@@ -6,6 +6,7 @@ Unittests for BaseModel class
 import unittest
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
     """
     Test cases for BaseModel class
@@ -44,6 +45,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_json['my_number'], 89)
         self.assertIn('created_at', my_model_json)
         self.assertIn('updated_at', my_model_json)
+
 
 if __name__ == "__main__":
     unittest.main()
